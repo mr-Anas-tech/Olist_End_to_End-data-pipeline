@@ -1,13 +1,24 @@
+version: 2
+
 sources:
   - name: raw_olist
-    project: dbt-learning-493706
-    dataset: raw_olist
+    description: Raw Olist tables in BigQuery
+    database: dbt-learning-493706
+    schema: raw_olist
     tables:
       - name: raw_olist_orders
+        description: Orders
       - name: raw_olist_customers
+        description: Customers
       - name: raw_olist_geolocation
+        description: Geolocation
       - name: raw_olist_payments
+        description: Payments
       - name: raw_olist_order_items
+        description: Order items
       - name: raw_olist_seller
+        description: Sellers
       - name: raw_olist_products
+        description: Products
       - name: raw_olist_reviews
+        description: Reviews
