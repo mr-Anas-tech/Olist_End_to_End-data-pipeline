@@ -6,9 +6,9 @@ with products As(
 clean_products as(
     select  
     product_id,
-    coalesce(product_category_name, 'Unkown') as product_category_name,
-    coalesce(product_name_lenght, 0)  as product_name_lenght,
-    coalesce(product_description_lenght, 0) as product_description_lenght,
+    coalesce(product_category_name, 'Unknown') as product_category_name,
+    coalesce(product_name_lenght, 0)  as product_name_length,
+    coalesce(product_description_lenght, 0) as product_description_length,
     coalesce(product_photos_qty, 0) as product_photos_qty,
     coalesce(product_weight_g, 0) as product_weight_g,
     coalesce(product_height_cm, 0) as product_height_cm,
