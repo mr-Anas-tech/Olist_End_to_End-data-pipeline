@@ -8,11 +8,11 @@ cleaned_orders as(
     order_id,
     coalesce(customer_id, 'Unknown') as  customer_id,
     coalesce(order_status, 'Unknown') as order_status,
-    date(timestamp(coalesce(order_purchase_timestamp, '1970-01-01 00:00:00')))  as order_purchase,
-    date(timestamp(coalesce(order_approved_at, '1970-01-01 00:00:00'))) as order_approved,
-    date(timestamp(coalesce(order_delivered_carrier_date, '1970-01-01 00:00:00'))) as order_delivered_carrier_date,
-    date(timestamp(coalesce(order_delivered_customer_date,'1970-01-01 00:00:00'))) as oorder_delivered_customer_date,
-    date(timestamp(coalesce(order_estimated_delivery_date, '1970-01-01 00:00:00'))) as order_estimated_delivery_date
+    date(timestamp(order_purchase_timestamp))  as order_purchase,
+    date(timestamp(order_approved_at)) as order_approved,
+    date(timestamp(order_delivered_carrier_date)) as order_delivered_carrier_date,
+    date(timestamp(order_delivered_customer_date)) as order_delivered_customer_date,
+    date(timestamp(order_estimated_delivery_date)) as order_estimated_delivery_date
     from orders
 )
 
