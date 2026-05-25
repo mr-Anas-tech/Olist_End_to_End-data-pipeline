@@ -9,7 +9,7 @@ c_payment as(
     coalesce(payment_sequential, 0) As payment_sequential,
     coalesce(payment_type, 'Unknown') as payment_method,
     coalesce(payment_installments, 0) as payment_installments,
-    coalesce(payment_value, percentile_cont(payment_value, 0.5)over()) as payment_value
+    coalesce(payment_value, 0) as payment_value
     from payments
 )
 
