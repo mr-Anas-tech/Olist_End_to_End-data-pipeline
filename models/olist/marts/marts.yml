@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: fct_olist_orders
+    description: "The core Fact table of the Olist ecosystem. It consolidates transactions, cleaned logistics KPIs, processed financial metrics, and customer reviews into a single grain row per order."
+    columns:
+      - name: order_id
+        description: "Primary Key: The unique identifier for each e-commerce order."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "Foreign Key: Maps directly back to the dim_olist_customers table."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_olist_customers')
+                field: customer_id
+
+      - name: order_status
+        description: "The current operational milestone of the order lifecycle."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['delivered', 'shipped', 'canceled', 'invoiced', 'processing', 'approved', 'unavailable', 'created']
+
+      - name: order_purchase
+        description: "The date when the customer placed the order. Cleaned to remove timestamps. Defaulted to 1900-01-01 if missing."
+        tests:
+          - not_null
+
+      - name: total_price
+        description: "The total gross value of products purchased in the transaction. Nulls handled as 0."
+        tests:
+          - not_null
+
+      - name: total_amount_paid
+        description: "The actual payment amount captured by the banking ledger/gateway."
+        tests:
+          - not_null
+
+  - name: dim_olist_customers
+    description: "Customer Master Dimension table storing unique buyer profiles and their demographic regions."
+    columns:
+      - name: customer_id
+        description: "Primary Key: The unique transactional identifier assigned to a specific checkout session."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_unique_id
+        description: "The actual permanent legal identity of the customer (allows tracking of repeat buyers across multiple separate customer_ids)."
+        tests:
+          - not_null
+
+  - name: dim_olist_products
+    description: "Product Catalog Master Dimension containing normalized categories and physical specifications."
+    columns:
+      - name: product_id
+        description: "Primary Key: The unique alphanumeric SKU/ID for a product item."
+        tests:
+          - unique
+          - not_null
+
+      - name: product_category_name
+        description: "Cleaned product category grouping. Missing values default to 'No Category'."
+        tests:
+          - not_null
+
+  - name: dim_olist_seller
+    description: "Seller Profiles Master Dimension tracking operational vendor localization across Brazil."
+    columns:
+      - name: seller_id
+        description: "Primary Key: The unique merchant identifier."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_olist_geolocation
+    description: "Socio-economic mapping data linking zip code prefixes to exact geographic latitude and longitude coordinates."
+    columns:
+      - name: geolocation_zip_code_prefix
+        description: "Primary Key / Composite Key link representing localized routing sectors."
+        tests:
+          - not_null
