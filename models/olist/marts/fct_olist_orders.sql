@@ -18,10 +18,14 @@ reviews as (
     select * from {{ ref('int_order_reviews_sentiments') }}
 ),
 
-joined as (
+order_item as(
+    select * from 
+    {{ ref('stg_olist_order_items') }}
+),joined as (
     select
         o.order_id,
         o.customer_id,
+        coalesce(oi.product_id, 'Unknown') as product_id,
         o.order_status,
         coalesce(cast(o.order_purchase as date), date('1900-01-01')) as order_purchase,
         coalesce(cast(o.order_approved as date), date('1900-01-01')) as order_approved,
@@ -46,11 +50,13 @@ joined as (
     left join logistics l on o.order_id = l.order_id
     left join payment p on o.order_id = p.order_id
     left join reviews r on o.order_id = r.order_id
+    left join order_item oi on oi.order_id=o.order_id
 )
 
 select
     order_id,
     customer_id,
+    product_id,
     order_status,
     order_purchase,
     order_approved,
