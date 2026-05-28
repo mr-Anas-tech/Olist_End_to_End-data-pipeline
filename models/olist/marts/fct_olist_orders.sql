@@ -32,7 +32,7 @@ order_item as(
         coalesce(l.actual_delivery_time_days, 0) as actual_delivery_time_days,
         coalesce(l.order_estimated_delivery_time_days, 0) as order_estimated_delivery_time_days,
         coalesce(l.delivery_delay_days, 0) as delivery_delay_days,
-        coalesce(l.is_late_delivery, false) as is_late_delivery,
+        coalesce(l.is_late_delivery, 0) as is_late_delivery,
         coalesce(l.seller_shipment_status, 'Not_shipped') as seller_shipment_status,
         coalesce(p.total_price, 0) as total_price,
         coalesce(p.total_amount_paid, 0) as total_amount_paid,

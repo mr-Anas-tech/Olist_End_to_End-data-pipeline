@@ -21,7 +21,7 @@ final As(
     end as delivery_delay_days,
     case 
     when o.order_delivered_customer_date>o.order_estimated_delivery_date then
-    True else False end as is_late_delivery,
+    1 else 0 end as is_late_delivery,
     case 
     when o.order_delivered_carrier_date>oi.shipping_limit_date then 'Delay by seller'
     when o.order_delivered_carrier_date is null then 'Not yet shipped'
