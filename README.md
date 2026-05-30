@@ -41,6 +41,9 @@ To ensure high data integrity before reports generation, strict automated govern
 * **Business Logic Validation:** Configured `accepted_values` validation arrays on engineered attributes like `review_sentiment` to guarantee data uniformity ('Positive', 'Neutral', 'Negative') throughout pipeline changes.
 * **In-Line Documentation:** Documented the structural properties, ownership parameters, and definitions of individual attributes inside centralized `schema.yml` configuration manifests, auto-compiling data lineage models.
 
+  <img width="1765" height="652" alt="Screenshot 2026-05-30 092024" src="https://github.com/user-attachments/assets/b6062ac1-5152-45e9-bb0b-6fcbea156077" />
+
+
 ### 4. Downstream BI Engine Integration
 * **BigQuery Connector Integration:** Connected the finalized consumer-facing Marts layer seamlessly into Power BI via the native Google BigQuery Data Connector. 
 * **Optimized Dimensional Architecture:** The schema design maps data at optimized grains to facilitate dynamic, sub-second cross-filtering across metrics without requiring heavy memory usage on the reporting client side.
