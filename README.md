@@ -73,7 +73,7 @@ To ensure high data integrity before reports generation, strict automated govern
 
 
 
-**************************************   Dashoard Link :
+**************************************   Dashboard Link :
 
 https://drive.google.com/file/d/1-zbIDhSKpA0D8xzyANfQcEjErilHP-Tv/view?usp=sharing
 
