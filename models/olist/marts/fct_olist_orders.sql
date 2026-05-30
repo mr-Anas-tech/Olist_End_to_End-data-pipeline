@@ -21,7 +21,9 @@ reviews as (
 order_item as(
     select * from 
     {{ ref('stg_olist_order_items') }}
-),joined as (
+),
+
+joined as (
     select
         o.order_id,
         o.customer_id,
